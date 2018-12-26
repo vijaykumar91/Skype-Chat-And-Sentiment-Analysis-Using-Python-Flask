@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: future-fstrings
+Version: 0.4.4
+Summary: A backport of fstrings to python<3.6
+Home-page: https://github.com/asottile/future-fstrings
+Author: Anthony Sottile
+Author-email: asottile@umich.edu
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: tokenize-rt; python_version<"3.6"
+
+UNKNOWN
+
+

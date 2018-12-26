@@ -1,0 +1,58 @@
+what is the email address I should send the github invitation to?
+HI Ming,
+
+Good Day to you!!
+
+Please provide us the .gif file for the image you have used on the splash screen.
+
+Thanks
+
+Amit
+Hi Ming,
+
+The GitHub id you requested is as follows :
+
+amitpmloginworks@gmail.com
+
+Thanks
+
+Amit
+what is the email address I should send the github invitation to?
+Did you get the animation.zip for the splash screen?
+Please provide us the .gif file for the image you have used on the splash screen.
+The email address has also be a valid github user id. The provided is not accepted by github. Please send a new one.
+Hi Ming,
+
+The GitHub id you requested is as follows :
+
+amitpmloginworks@gmail.com
+
+Thanks
+
+Amit
+Hi Ming,
+
+I have received this, but we need to have have the the .gif image which you uploaded on the Invision.
+
+Thanks
+
+Amit
+Did you get the animation.zip for the splash screen?
+I don't have the gif. Only the html and the js. Why not just integrated the html and js into the project?
+HI Ming,
+
+Can we have it there in the 2nd milestone?
+
+Thanks
+
+Amit
+I think my client would expect that when we show what has been achieved in the 1st milestone.
+I have already tried to integrate the animation.zip files, but the files you have provided, that is from the website.
+
+We need to the have images in order to create the the splash screen, because when we upload the splash on IONIC build it accepts only image and gif only.
+
+Let me know if you have further queries.
+
+Thanks
+
+Amit

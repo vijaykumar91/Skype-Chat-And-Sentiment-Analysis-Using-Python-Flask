@@ -1,0 +1,524 @@
+from flask import Flask,request, render_template, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+from flask import Response
+from flask import jsonify
+import urllib.request
+import hashlib
+import sys
+from flask_cors import CORS, cross_origin
+from urllib.request import Request, urlopen
+from sqlalchemy import func, create_engine
+from bs4 import BeautifulSoup
+import json
+from collections import Counter
+#-----------  read file ----module-----
+import glob
+import errno
+import os
+#-------------- read file -----module end--
+#date time
+import datetime
+# for get sentiment word
+import Algorithmia
+client = Algorithmia.client("sim5bi+k7qsHJBcNbtxku4CGLb71")
+
+app = Flask(__name__)
+CORS(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+#----- read all text file----------------
+path = 'C:/data_analytics/files/june/*.txt'
+#------ read all text file  end ---------------
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:@localhost/analytics'
+engine = create_engine("postgresql://postgres:@localhost/analytics", isolation_level="AUTOCOMMIT")
+db=SQLAlchemy(app)
+
+
+class Signup(db.Model):
+    __tablename__='signup'
+    id=db.Column('id',db.Integer,primary_key=True)
+    name=db.Column('username',db.String)
+    email=db.Column('email',db.String)
+    password=db.Column('password',db.String)
+    active = db.Column('active', db.Integer)
+    mobile = db.Column('mobile', db.String)
+    skype_id = db.Column('skype_id', db.String)
+    address_1 = db.Column('address_1', db.String)
+    address_2 = db.Column('address_2', db.String)
+    city = db.Column('city', db.String)
+    state = db.Column('state', db.String)
+    zip = db.Column('zip', db.String)
+    gender = db.Column('gender', db.String)
+    dob = db.Column('dob', db.String)
+    merital_status = db.Column('merital_status', db.String)
+    company_name = db.Column('company_name', db.String)
+    company_address = db.Column('company_address', db.String)
+
+
+    def __init__(self,name,email,password):
+        self.name = name
+        self.id = id
+        self.email = email
+        self.password = password
+        self.mobile = mobile
+        self.skype_id = skype_id
+        self.address_1 = address_1
+        self.address_2 = address_2
+        self.city = city
+        self.state = state
+        self.zip = zip
+        self.gender = gender
+        self.dob = dob
+        self.merital_status = merital_status
+
+
+@app.route("/signup", methods=['POST','GET'])
+def signup_form():
+    error = ""
+    alert = ""
+    status = {
+            'message': 'User Signup Successfully.',
+            'status': True,
+            'status_code': 1,
+    }
+    statusUserName = {
+        'message': 'User Name Allredy Exist.',
+        'status': False,
+        'status_code': 0
+    }
+    statusUserValidation = {
+        'message': 'required fields cant be blank(All fields are required).',
+        'status': False,
+        'status_code': 0
+    }
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        user = jsonData['user_name']
+        email =jsonData['email_id']
+        password = hashlib.sha224(jsonData['password'].encode('utf-8')).hexdigest()
+        if password == "" or user == ""  or email == "":
+            return jsonify(statusUserValidation)
+        else:
+            if Signup.query.filter(Signup.name == user).first():
+                return jsonify(statusUserName)
+            else:
+                data = Signup(user,email,password)
+                db.session.add(data)
+                db.session.commit()
+
+    return jsonify(status)
+
+
+@app.route("/login", methods=['POST','GET'])
+def login_form():
+    error=""
+    alert=""
+    statusLogin = {
+        'message': 'User Login Successfully.',
+        'status': True,
+        'status_code': 1,
+    }
+    userDeactive = {
+        'message': 'Sorry Your Account  had De-Active please contact Admin.',
+        'status': True,
+        'status_code': 0,
+    }
+    statusUserValidation = {
+        'message': 'required fields cant be blank(All fields are required).',
+        'status': False,
+        'status_code': 0
+    }
+    statusLoginFails = {
+        'message': 'No matching user against the given credentials.',
+        'status': False,
+        'status_code': 0,
+    }
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        email = jsonData['email']
+        password = hashlib.sha224(jsonData['password'].encode('utf-8')).hexdigest()
+
+        if password == "" or email =="":
+                return jsonify(statusUserValidation)
+        else:
+            if Signup.query.filter(Signup.email == email,Signup.password == password).first():
+                if Signup.query.filter( Signup.active == 1).first:
+                    userData=Signup.query.filter(Signup.email == email,Signup.password == password).all()
+                    statusLogin = {
+                        'message': 'User Login Successfully.',
+                        'status': True,
+                        'status_code': 1,
+                        'id' : userData[0].id,
+                        'name' : userData[0].name,
+                        'email': userData[0].email,
+                        'mobile': userData[0].mobile,
+                        'skype_id': userData[0].skype_id,
+                        'address_1': userData[0].address_1,
+                        'address_2': userData[0].address_2,
+                        'city': userData[0].city,
+                        'state': userData[0].state,
+                        'zip': userData[0].zip,
+                        'gender': userData[0].gender,
+                        'dob': userData[0].dob,
+                        'merital_status': userData[0].merital_status,
+                        'company_name': userData[0].company_name,
+                        'company_address': userData[0].company_address,
+                        'token' : ''
+                    }
+                    return jsonify(statusLogin)
+                else:
+
+                    return jsonify(userDeactive)
+            else:
+                alert = "No matching user against the given credentials"
+    return jsonify(statusLoginFails)
+
+@app.route("/update", methods=['POST','GET'])
+def update_form():
+    idValidation = {
+        'message': 'user id required.',
+        'status': True,
+        'status_code': 0,
+    }
+    updateUserMessage = {
+        'message': 'User Login Successfully.',
+        'status': True,
+        'status_code': 1,
+    }
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        id = jsonData['id']
+        name = jsonData['name']
+        email = jsonData['email']
+        mobile = jsonData['mobile']
+        skype_id = jsonData['skype_id']
+        address_1 = jsonData['address_1']
+        address_2 = jsonData['address_2']
+        city = jsonData['city']
+        state = jsonData['state']
+        zip = jsonData['zip']
+        gender = jsonData['gender']
+        dob = jsonData['dob']
+        merital_status = jsonData['merital_status']
+        company_name = jsonData['company_name']
+        company_address = jsonData['company_address']
+
+        if id == "":
+                return jsonify(idValidation)
+        else:
+
+            #print(engine.execute(func.updatebesicdetails('1','update','7838043535')).scalar())
+            #engine.execute("SELECT * FROM updatebesicdetails( %s,%s,%s); ",1,'update','7838043535')
+            #stm="SELECT *  from updatebesicdetails(1,'vijay','9918261419')"
+            #engine.execute(stm)
+
+            result = engine.execute("select * from updateusername(5,'vijay.kumar@gmail.com')")
+            #for row in result:
+                #print("username:", row['email'])
+            return jsonify(updateUserMessage)
+
+@app.route("/search", methods=['POST','GET'])
+def search_form():
+    searchValidation = {
+        'message': 'pleas Enter Something.',
+        'status': True,
+        'status_code': 1,
+    }
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        searchData = jsonData['search']
+        if searchData == "":
+                return jsonify(searchValidation)
+        else:
+            #url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyA6yd1Yu55BU6ZRa7GDMSPfGo6rQRh0SW0&cx=017576662512468239146:omuauf_lfve&q="+searchData
+            #url= "https://www.google.co.in/search?q=loginworks+software"
+            #request1 = urllib.request.Request(url)
+            #response = urllib.request.urlopen(request1)
+            req = Request('https://www.google.co.in/search?q='+searchData,
+                          headers={'User-Agent': 'Mozilla/5.0'})
+            webpage = urlopen(req).read()
+            soup = BeautifulSoup(webpage, 'html.parser')
+            titles = soup.findAll('h3', attrs={'class': 'r'})
+            links = soup.findAll('cite')
+            descriptions = soup.findAll('span', attrs={'class': 'st'})
+            titlesArr = []
+            descriptionArr = []
+            linkArr = []
+            for title in titles:
+                titlesArr.append(title.text.strip())
+            for link in links:
+                linkArr.append(link.text.strip())
+            for description in descriptions:
+                descriptionArr.append(description.text.strip())
+            searchValidation = {
+                'message': 'pleas Enter Something.',
+                'status': True,
+                'title': titlesArr,
+                'url': linkArr,
+                'description': descriptionArr
+            }
+        return jsonify(searchValidation)
+        #return response.read()
+
+#***********************
+#Search Text from google
+#***********************
+@app.route("/search_website", methods=['POST', 'GET'])
+def ssearch_website_form():
+    searchValidation = {
+        'message': 'Pleas Enter website Url.',
+        'status': True,
+        'status_code': 1,
+    }
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        webUrl = jsonData['webUrl']
+        if webUrl == "":
+            return jsonify(searchValidation)
+        else:
+            webpage = urlopen(webUrl).read()
+
+            resp = Response(webpage, mimetype='text/html')
+            return resp
+            #return jsonify(webpage)
+
+
+#***********************
+#Search Text from google
+#***********************
+@app.route("/search_text", methods=['POST','GET'])
+def search_text_form():
+    searchValidation = {
+        'message': 'pleas Enter Something.',
+        'status': True,
+        'status_code': 1,
+    }
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        searchData = jsonData['search']
+        if searchData == "":
+                return jsonify(searchValidation)
+        else:
+            #url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyA6yd1Yu55BU6ZRa7GDMSPfGo6rQRh0SW0&cx=017576662512468239146:omuauf_lfve&q="+searchData
+            #url= "https://www.google.co.in/search?q=loginworks+software"
+            #request1 = urllib.request.Request(url)
+            #response = urllib.request.urlopen(request1)
+            req = Request('https://www.google.co.in/search?q='+searchData,
+                          headers={'User-Agent': 'Mozilla/5.0'})
+            webpage = urlopen(req).read()
+            soup = BeautifulSoup(webpage, 'html.parser')
+            containers = soup.findAll('div', attrs={'class': 'g'})
+            titles = soup.findAll('h3', attrs={'class': 'r'})
+            links = soup.findAll('cite')
+            descriptions = soup.findAll('span', attrs={'class': 'st'})
+            titlesArr =[]
+            descriptionArr =[]
+            linkArr= []
+            for title in  titles:
+                titlesArr.append(title.text.strip())
+            for link in  links:
+                linkArr.append(link.text.strip())
+            for description in  descriptions:
+                descriptionArr.append(description.text.strip())
+            searchValidation = {
+                'message': 'pleas Enter Something.',
+                'status': True,
+                'title': titlesArr,
+                'url': linkArr,
+                'description' : descriptionArr
+            }
+        return jsonify(searchValidation)
+
+#get  json request url
+@app.route("/get_setiment", methods=['POST','GET'])
+def get_setiment_form():
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        webUrl = jsonData['web_url']
+        find_sentiment(webUrl)
+
+
+
+#sentimental analysis section *************************************
+def get_links(url2):
+    """Gets links from URL"""
+    input = url2
+    if input.startswith("http") or input.startswith("https"):
+        algo = client.algo('web/GetLinks/0.1.5')
+        links = algo.pipe(input).result
+        return links
+    else:
+        print("Please enter a properly formed URL")
+
+
+def get_content(url1):
+    """Get text content from URL."""
+    data = get_links(url1)
+    algo = client.algo("util/Url2Text/0.1.4")
+    # Limit content extracted to only blog articles
+    content = [{"url": link, "content": algo.pipe(
+        link).result} for link in data if link.startswith(url1)]
+    return content
+
+
+def find_sentiment(url):
+    """Get sentiment from web content."""
+    data = get_content(url)
+    algo = client.algo("nlp/SentimentAnalysis/1.0.2")
+    try:
+        # Find the sentiment score for each article
+        algo_input = [{"document": item["content"]} for item in data]
+        algo_response = algo.pipe(algo_input).result
+
+        algo_final = [{"url": doc["url"], "sent": sent["sentiment"], "content": sent[
+            "document"]} for sent in algo_response for doc in data]
+        print(algo_final)
+        return algo_final
+
+    except Exception as e:
+        print(e)
+
+#*****************  end of Sentiment *****************
+
+
+#*****Start***
+#Count Setiment
+#***************
+
+@app.route("/get_sentiment", methods=['POST', 'GET'])
+def get_sentiment_form():
+    searchValidation = {
+        'message': 'Pleas Enter text.',
+        'status': True,
+        'status_code': 1,
+    }
+    polarity=''
+    textSet=''
+    if request.method == 'POST':
+        jsonData = request.get_json(force=True)
+        webUrl = jsonData['text']
+
+        if webUrl == "":
+            return jsonify(searchValidation)
+        else:
+            positive = readwords('positive.txt')
+            negative = readwords('negetive.txt')
+
+            paragraph = webUrl
+            #count = Counter(paragraph.split())
+            #print(count)
+            files = glob.glob(path)
+            # print(files)
+            for name in files:
+                try:
+                    with open(name) as f:
+
+                        #print (name)
+
+                        filename_w_ext = os.path.basename(name)
+                        filename, file_extension = os.path.splitext(filename_w_ext)
+                        filetext=" ".join(line.strip() for line in f)
+                        #print (filetext)
+                        count2 = Counter(filetext.split())
+
+                        pos = 0
+                        neg = 0
+                        for key, val in count2.items():
+                            key = key.rstrip('.,?!\n')  # removing possible punctuation signs
+                            if key in positive:
+                                pos += val
+                            if key in negative:
+                                neg += val
+
+
+                        sentiment = int(pos) - int(neg)
+                        positive = str(pos)
+                        negetive = str(neg)
+                        sentiment = str(sentiment)
+                        polarity = str(polarity)
+                        result = engine.execute("SELECT * FROM insertAnalysisData( %s,%s,%s,%s,%s); ",(positive,negetive,sentiment,polarity,filename))
+                except IOError as exc:  # Not sure what error this is
+                    if exc.errno != errno.EISDIR:
+                        raise
+
+            # count = Counter(paragraph.split())
+            # pos = 0
+            # neg = 0
+            # for key, val in count.items():
+            #     key = key.rstrip('.,?!\n')  # removing possible punctuation signs
+            #     if key in positive:
+            #         pos += val
+            #     if key in negative:
+            #         neg += val
+            # print (pos)
+            # print (neg)
+            # sentiment=int(pos)-int(neg)
+            # print (sentiment)
+            # sys.exit()
+            # date=datetime.datetime.now()
+            # date=date.strftime("%Y-%m-%d %H:%M:%S")
+            # positive=str(pos)
+            # negetive = str(neg)
+            # sentiment = str(sentiment)
+            # polarity=str(polarity)
+            # # #result = engine.execute("SELECT * FROM insertAnalysisData( %s,%s,%s,%s); ",(positive,negetive,sentiment,polarity))
+            new_data1 = []
+            sentimentArr = []
+            sentimentDate = []
+            sentimentProjectStatus = []
+            minVal=0;
+            maxVal = 0;
+            new_data=[]
+            resultGetAnalysisData = engine.execute("SELECT * FROM getAnalysisdata()")
+            resultGetAnalysisData2 = engine.execute("SELECT * FROM getAnalysisdata()")
+            textArr=[]
+            for line2 in resultGetAnalysisData2:
+                textArr.append(line2.id)
+
+            analysisLen=0
+            for line in resultGetAnalysisData:
+                new_data={}
+                if analysisLen == 0:
+                    sentimentProjectStatus.append('Project Started')
+                elif analysisLen == len(textArr)-1:
+                    sentimentProjectStatus.append('Project Completed Successfully')
+                else:
+                    sentimentProjectStatus.append('Project Continue....')
+
+                new_data['id']=line.id
+                sentimentArr.append(line.sentiment)
+                sentimentDate.append(line.created_at.strftime("%Y-%m-%d"))
+                new_data['positive'] = line.positive
+                new_data['negetive'] = line.negetive
+                new_data['sentiment'] = line.sentiment
+                new_data['polarity'] = line.polarity
+                new_data['created_at'] = line.created_at.strftime("%Y-%m-%d")
+                new_data['updated_at'] = line.updated_at
+                new_data1.append(new_data)
+                analysisLen+=1
+            sentimentArrSort=sorted(sentimentArr, key=int)
+
+            minVal=sentimentArrSort[0];
+            maxVal = sentimentArrSort[len(sentimentArrSort) - 1];
+            searchValidation = {
+                'message': 'analytics record.',
+                'status': True,
+                'analysisData':new_data1,
+                'sentimentArr':sentimentArr,
+                'date': sentimentDate,
+                'minVal':minVal,
+                'maxVal':maxVal,
+                'sentimentProjectStatus':sentimentProjectStatus
+            }
+            return jsonify(searchValidation)
+            sys.exit()
+
+def readwords( filename ):
+    f = open(filename)
+    words = [ line.rstrip() for line in f.readlines()]
+    return words
+
+
+if __name__=="__main__":
+    app.run()

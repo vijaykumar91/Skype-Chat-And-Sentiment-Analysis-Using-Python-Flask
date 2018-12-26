@@ -1,0 +1,3 @@
+Amit, as per discussion on skype yesterday, you are looking into this https://coursetro.com/posts/code/51/How-to-Make-an-Animated-Ionic-Splash-Page-with-HTML-&-CSS. Any luck?
+How to Make an Animated Ionic Splash Page with HTML & CSS
+The default cordova splash page plugin only allows you to specify static graphic files. You can use this work-around to simulate your own splash page, which enables you to use HTML and CSS to create a full splash page.

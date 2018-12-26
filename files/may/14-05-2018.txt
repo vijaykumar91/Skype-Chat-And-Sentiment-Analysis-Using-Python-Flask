@@ -1,0 +1,60 @@
+Hi, I reviewed the implementation. My colleagues in HK are reviewing it
+too.
+
+Here are my comments so far:
+
+1/ I expect the all the list-based screens are scrollable with bouncing
+when reaching to the top and the bottom of the list. These screens are
+Discover, Device List, and all Customization screens.
+2/ Splash screen is not integrated. HTML5 code has already provided.
+3/ All icon resolutions are low.
+4/ Sync On/Off have no effect.
+5/ Missing Homespot Device Actions in Discover screen. Need to discuss this.
+6/ Missing Paired Device Actions in Device List.
+7/ Pair new button doesn't work.
+8/ Bluetooth Name has no effect.
+9/ On/Off Buttons and ">" are too close to the edges.
+10/ PEQ curve area should be larger (increase the height to half the screen
+size).
+11/ PEQ button (Pop) doesn't work.
+12/ Page transitions:
+
+
+The transition between Discover and LR Receiver screens is not
+sliding.
+The transitions inside customization sub-screens are not sliding.
+Better to discuss to see overall transition effects should be
+managed.
+
+13/ Circle is too close to the edge in the volume bar - it covers the
+volume bar icon.
+14/ Misc problems. See screenshot A, B, and C
+15/ Samsung S8 specific issues:
+
+
+Just lock in portrait mode. Don't need landscape.
+Alignment issue. See screenshot G.
+
+16/ Nexus 4 specific issues:
+
+
+The canvas is not optimized to the screen size. See screenshot D.
+Just lock into portrait mode. Don't need landscape.
+1st screen loading time from scratch is very slow - take 18s vs
+similar iconic app takes 8s.
+
+17/ Nexus 7 specific issues:
+
+
+Alignment issue. See screenshot E and F.
+1st screen loading time from scratch is very slow - take 15s vs
+similar ionic app takes 7s.
+landscape mode doesn't work.
+Hi Ming,
+
+Thanks for the feedback. Let me review it and will respond back to you on these points.
+
+Thanks
+
+Amit
+No problem. Let have a call as well after you review the comments. Want to make sure we are in sync of the changes.

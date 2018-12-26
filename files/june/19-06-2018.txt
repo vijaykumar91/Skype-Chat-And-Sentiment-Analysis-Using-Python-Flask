@@ -1,0 +1,18 @@
+Hi Ming,
+
+I am about to finish the timelines and estimate revision for the 2nd milestone but I need your input on the following two items :
+
+
+Customization of LED
+Customization of Volume Sync
+
+If you can explain these two then I can precisely send you the estimates and we can connect tomorrow for the same.
+
+Thanks
+
+Amit
+These two are merely flipping the switch by calling "setSleepMode" and "setVolumeSync" api from the QCC_SNK atCmdHandler.
+
+https://github.com/GT-tronics/ionic3-sample/blob/master/docs/atcmd-dispatcher/api-qcc-snk-handler.md#set-sleep-mode
+
+https://github.com/GT-tronics/ionic3-sample/blob/master/docs/atcmd-dispatcher/api-qcc-snk-handler.md#set-volume-sync

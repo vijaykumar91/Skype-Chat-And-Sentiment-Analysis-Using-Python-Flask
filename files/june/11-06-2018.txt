@@ -1,0 +1,50 @@
+For milestone 1, please check in the code into https://github.com/GT-tronics/loginworks-hs-m1.git
+Hi Ming,
+
+As discussed, We will be meeting today at 9AM EST ( 6.30 PM IST ) today in order to share timelines for Milestone 2 and discussion on the libraries been shared.
+
+Thanks
+
+Amit
+I'm ready any time
+Hi Ming,
+
+Let's connect in next 5 minutes
+
+Thanks
+
+Amit
+Join our Cloud HD Video Meeting now
+Zoom is the leader in modern enterprise video communications, with an easy, reliable cloud platform for video and audio conferencing, chat, and webinars across mobile, desktop, and room systems. Zoom Rooms is the original software-based conference room solution used around the world in board, conference, huddle, and training rooms, as well as executive offices and classrooms. Founded in 2011, Zoom helps businesses and organizations bring their teams together in a frictionless environment to get more done. Zoom is a private company headquartered in San Jose, CA.
+Amit, just to confirm the ionic3-sample app can run in android and function exactly in iOS.
+Hi Ming,
+
+As discussed, Please find the MOM for the meeting we had today :
+
+Attendees: Amit, Yatash and Ming
+
+Action points :
+
+
+
+We need to setup the code from the other repository where the 5 steps have been written but not in the other repository. Cordova
+
+
+
+Also, The Code needs to be tested on iOS and Android both.
+
+
+
+Once we were able to run the code, then by tomorrow we will be submitting the timelines for the completion of 2nd Milestone.
+
+
+
+Thanks
+
+Amit
+Confirmed that the ionic3-sample can run on android.
+Okay, Will check and confirm.
+
+Thanks
+
+Amit

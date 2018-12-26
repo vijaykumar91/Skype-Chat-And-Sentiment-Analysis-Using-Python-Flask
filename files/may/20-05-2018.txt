@@ -1,0 +1,13 @@
+[5/20/2018 11:29:20 AM] Ming Leung: splash screen animation
+
+[5/20/2018 11:42:40 AM] Ming Leung: For apps which has list based screen, scrollable list was an intrinsic requirement, especially for the Device List and Discover screen the items are dynamically added based on discovery. Otherwise the app will not work at all.
+
+[5/20/2018 1:04:19 PM] Amit Tripathi: Hi Ming,
+
+Please be Noted, We are still not in the receipt of the device which Of-Course will affect the milestone timelines now and a new timeline will be given to you once we are in receipt of the device.
+
+Thanks
+
+Amit
+
+[5/20/2018 9:14:17 PM] Ming Leung: Amit, understood. That’s a bit unfortunate. But let’s use this time to address all UI issue. To save us time in the next milestone, we are preparing an extra layer of TS API which will send and parse AT commands so you will have less work to do.

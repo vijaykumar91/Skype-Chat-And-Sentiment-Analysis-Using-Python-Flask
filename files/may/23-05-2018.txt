@@ -1,0 +1,30 @@
+Hi Ming,
+
+Please find attached the minutes of meeting we discussed:
+
+Attendees: Amit and Ming
+
+Action Points :
+
+
+
+The Images for the devices are required to be provided by Ming.
+
+
+
+Also, the feedbacks given are more of the things related with the dynamic version of the APP.
+
+
+
+We will be getting the screens to be ready at the background for the dynamic process.
+
+
+
+We will be integrating the spalsh screen as provided.
+
+
+
+Decision Made : We will work on covering maximum UI work until we are not able to work on 2nd Milestone due to device availability.
+
+Thanks
+

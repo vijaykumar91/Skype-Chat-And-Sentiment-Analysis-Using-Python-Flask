@@ -1,0 +1,11 @@
+Hi Ming, Please find attached.
+Other issues:
+1/ For a fresh start (i.e. after killing the app), it takes 13s from start to seeing the 1st screen. During that 13s, we saw a blank white screen.
+2/ The pull-down-to-scan is not smooth on Nexus 4/7. Samsung S8 is ok.
+3/ In general, seem like the UI elements positions are fixed rather than responsive to the canvas size.
+
+Shall we meet now?
+Hi Ming,
+
+As discussed, I will be providing you the code snippet and we will discuss tomorrow in order to close Milestone #1
+Yes. please provide the Discover page ts and html.

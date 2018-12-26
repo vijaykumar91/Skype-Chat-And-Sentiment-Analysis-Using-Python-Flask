@@ -1,0 +1,29 @@
+HI Ming,
+
+Android Scenario:
+
+We have tried to install and run the plugin from the other repository but again it didn`t worked as it shows some files missing. I am attaching here a screenshot for the same.
+
+Also, there were few commands which were not working, "mkdir -p ionic/test".which says to make folder for ionic then test, but lately when we reached at Step 3: we see this command "cd ~/Development/test/ionic3-sample/" which does not show the folder of ionic in commands after that we execute this command "ionic cordova plugin add ../../../cordova-plugin-dataexchanger".which prompt the message of path is not specified and also it shows package.json is missing which might be due to path is not specified.
+Please prepare to share the terminal online @9.
+
+We will walk through the step together.
+If you want to start earlier than 9am, I am available now
+Hi Ming,
+
+We are ready
+Join our Cloud HD Video Meeting now
+Zoom is the leader in modern enterprise video communications, with an easy, reliable cloud platform for video and audio conferencing, chat, and webinars across mobile, desktop, and room systems. Zoom Rooms is the original software-based conference room solution used around the world in board, conference, huddle, and training rooms, as well as executive offices and classrooms. Founded in 2011, Zoom helps businesses and organizations bring their teams together in a frictionless environment to get more done. Zoom is a private company headquartered in San Jose, CA.
+Hi Ming,
+
+As discussed, Please find the apk which we build over the call.
+Amit, forgot to mention: while I am looking into your android device issue, can you build an iOS device and give it a try. If the iOS device exhibit the same issue, I suspect the issue would be in the firmware of the bluetooth receiver. The log will help to narrow down the issue.
+Yeah, I am expecting the same to be there. For now let me get it tested along with log and will get back to you.
+
+Thanks
+
+Amit
+Found the issue. The firmware in your bluetooth device is slightly different. I am patching the app now so it can work with your device.
+Hi Ming,
+
+Thanks for the update!!!

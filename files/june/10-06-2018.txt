@@ -1,0 +1,13 @@
+Hi Ming,
+
+I a submitting payment request with reference to meeting you had with Amit.
+
+"As discussed, We will be meeting again on coming Monday 11th June 2018 to discuss further steps in 2nd milestone.
+
+Also, You will be releasing the payment for milestone 1 and we will be marking #Milestone 1 to be closed.
+
+Thanks"
+Milestone 1: "App GUI of all screen"
+Payment released
+Thanks
+As mentioned, we took the extra work (from milestone 2) to develop the AT command processing layer to simplify the way that the app layer would control and monitor the bluetooth device. You can find the working ionic sample app in the github repo to illustrate how the API works. Please study the code and come back with questions on Monday. We need to expedite milestone 2 to recover the one month lost time in milestone #1.

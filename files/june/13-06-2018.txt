@@ -1,0 +1,52 @@
+Amit, the app is patched, but we need to upgrade the firmware on the bluetooth receiver. Here is the link to the upgrade package: https://www.dropbox.com/s/3ixa14x5xkvojw4/dfu_snk_431_1806122243.rar?dl=0. I will walk you through upgrade process.
+I won't be able to meet tomorrow morning. Can you do it now?
+Hi Ming,
+
+The earliest possible from my side can be after 2 hours from now. Let me know if you are available.
+
+Thanks
+
+Amit
+It will be too late for me. How about 8am EST?
+Let's do it tomorrow at 8.30 AM EST. Please confirm.
+Amit, 8:30am is too late for me today. I can do it as early as 7:30am
+Hi Ming,
+
+Today it wont be possible as I have another meeting, So let's have it by tomorrow 8.30 AM.
+Can you do it around 10:00am then?
+By the time Team will not be available. I believe tomorrow will be the best time to connect.
+Alright. Let's reconnect @9:00am our regular time tomorrow.
+Ok Sure.. Thanks
+
+Amit
+actually. I can't do it @9 tomorrow morning either. This week morning is a bad week for me.
+
+I will send you the procedure to do a firmware upgrade.
+To upgrade the firmware in the Bluetooth receiver, follow the steps below:
+
+1/ Unzip this file (link
+https://www.dropbox.com/s/3ixa14x5xkvojw4/dfu_snk_431_1806122243.rar?dl=0)
+in a temporary directory in a window PC. Go to that directory.
+2/ Connect the Bluetooth receiver USB to the PC.
+3/ In a cmd prompt, type: HidDfuCmd upgrade 0xA12 0xFFFE 0 0
+image_signed.dfu
+4/ You should get something like this:
+
+C:\Temp>HidDfuCmd upgrade 0xA12 0xFFFE 0 0 image_signed.dfu
+HidDfuCmd, version 2.6.10.1719 Release
+Copyright (c) 2012-2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+Found 1 devices. Do you want to upgrade all? (y/n) y
+upgrade succeeded
+Device reset succeeded
+
+C:\Temp>
+
+On the app side, just do a git pull on the ionic3-sample project and rebuild.
+Sorry. Forgot step 2.5 (step between 2 and 3) in the firmware upgrade procedure:
+2.5/ Once the Bluetooth receiver is connected to the PC via USB, press-and-hold the button on the back for 2 sec until both LEDs are alternatively blinking. Then release the button. While both LEDs are alternatively blinking, press the button once again - this time just press-then-release. You should see the third led come up and the other two leds are off. The bluetooth receiver is now in upgrade mode.
+If the Bluetooth receiver has both leds alternatively blinking right after power up, you don't need to press-and-hold 2s as you are already in pairing mode. So you just single press the button to go into the upgrade mode.
+Sorry. Forgot step 2.5 (step between 2 and 3) in the firmware upgrade procedure:
+2.5/ Once the Bluetooth receiver is connected to the PC via USB, press-and-hold the button on the back for 2 sec until both LEDs are alternatively blinking. Then release the button. While both LEDs are alternatively blinking, press the button once again - this time just press-then-release. You should see the third led come up and the other two leds are off. The bluetooth receiver is now in upgrade mode.

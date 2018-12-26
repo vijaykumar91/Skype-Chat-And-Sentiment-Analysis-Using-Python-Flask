@@ -1,0 +1,5 @@
+As mentioned, I can accept the revised timeline only if you agree to drop a few interim apk between now and july 12th to show the progress and fix earlier issues. July 12th is the latest before seeing our clients. We need to fix all issues prior to that time.
+
+Btw, the repo invited for milestone #1 is empty. https://github.com/amitpmloginworks/HomeSpot22ndJune
+amitpmloginworks/HomeSpot22ndJune
+Contribute to HomeSpot22ndJune development by creating an account on GitHub.

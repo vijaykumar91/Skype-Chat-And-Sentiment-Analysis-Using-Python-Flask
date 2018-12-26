@@ -1,0 +1,30 @@
+Looking for a front-end hybrid app developer to build a companion app for a Bluetooth Audio Receiver (BAR hereafter) product. The app must be built under ionic 3 and Cordova framework (template supplied) and run on iPhone/iPad and Android Phone/Tablet devices.
+
+The main functions of the app are:
+
+1/ manage audio links of BAR - e.g. audio-connect (or disconnect) with a particular device, entering pairing mode, etc
+2/ display status of BAR - e.g. link quality, play status, profile availability, profile connected, codec-in-use, etc
+3/ change config of BAR - e.g. change receiver name
+4/ change audio effect of BAR - i.e. PEQ
+
+A mock-up has been built using AdobeXD and Invision to illustrate the app details and work flow. The app will interface with the Bluetooth receivers using AT commands/responses via a Cordova plugin. All the hard work to handle link management, status retrieval, config changes are done in the BAR's firmware and the Cordova plugin which is abstracted by the AT command set. Therefore, the app developer just needs to focus on the UI/UX. Both the AT command specification and the Cordova plugin library will be provided. A separated iOS app will also be provided to exercise the AT commands on the receivers for reference and debugging purpose.
+
+Other requirements:
+1/ The app must run on any iPhones and iPads with iOS10.x, and iOS11.x.
+2/ The app must run on any Android phone and tablet with Android 5.x, 6.x, 7.x, and 8.x
+3/ The app must prepare to support multiple languages - the initial language is English only.
+4/ All source codes must be included as a deliverable for the project.
+5/ This project must have 3+ milestones to show the progress of the development.
+
+This job was posted from a mobile device, so please pardon any typos or any missing details.
+Hi Ming,
+
+Thanks for your business.
+
+I am submitting here a detailed proposal inclusive of the scope of work and cost and also submitting other assets we have posted in the previous message.
+
+Regards
+Ganesh
+This should be the latest project plan
+
+Here is the html/js code for the splash screen.
