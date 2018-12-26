@@ -77,7 +77,8 @@ engine = create_engine("postgresql://postgres:@localhost/analytics", isolation_l
 #---- Postgres Connector end-------------------#
 
 #---- Mongo Connector Start-------------------#
-client = MongoClient('localhost', 27017)
+DbUri='mongodb://analytics:analytics#1@ds139534.mlab.com:39534/lws_sentiment'
+client = MongoClient(DbUri)
 mydb = client.analytics
 #---- MOngo Connector Start-------------------#
 
