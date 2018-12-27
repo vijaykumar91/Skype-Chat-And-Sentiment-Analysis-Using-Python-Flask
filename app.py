@@ -73,7 +73,7 @@ CORS(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #---- Postgres Connector Start-------------------#
-engine = create_engine("postgresql://postgres:@localhost/analytics", isolation_level="AUTOCOMMIT")
+#engine = create_engine("postgresql://postgres:@localhost/analytics", isolation_level="AUTOCOMMIT")
 #---- Postgres Connector end-------------------#
 
 #---- Mongo Connector Start-------------------#
@@ -85,6 +85,7 @@ mydb = client
 #---- Mysql Connector Start-------------------#
 # python app.pydfvdgdfg
 #---- Mysql Connector Start-------------------#
+'''
 db=SQLAlchemy(app)
 
 sk=''
@@ -124,7 +125,7 @@ class Signup(db.Model):
         self.gender = gender
         self.dob = dob
         self.merital_status = merital_status
-
+'''
 #************ Signup start*******
 @app.route("/signup", methods=['POST','GET'])
 def signup_form():
@@ -392,7 +393,7 @@ def forgotPass_form():
             sys.exit()
     return jsonify(status)
 #************ Forgot Password*******
-
+'''
 @app.route("/search_cat", methods=['POST','GET'])
 def search_cat_form():
     searchValidation = {
@@ -427,7 +428,7 @@ def search_cat_form():
         }
         return jsonify(searchValidation)
         sys.exit
-
+'''
 @app.route("/search", methods=['POST','GET'])
 def search_form():
     searchValidation = {
