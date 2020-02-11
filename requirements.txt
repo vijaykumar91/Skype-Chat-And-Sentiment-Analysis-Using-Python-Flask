@@ -32,7 +32,7 @@ decorator==4.3.0
 defusedxml==0.5.0
 dj-database-url==0.4.2
 dj-email-url==0.1.0
-Django==2.0.2
+Django==2.2.10
 django-celery-results==1.0.1
 django-reset-migrations==0.3.1
 djangorestframework==3.9.0
