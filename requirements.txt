@@ -55,7 +55,7 @@ google-auth-httplib2==0.0.3
 gunicorn==19.7.1
 heroku==0.1.4
 html5lib==1.0.1
-httplib2==0.11.3
+httplib2==0.18.0
 httpretty==0.8.14
 idna==2.6
 inflection==0.3.1
