@@ -478,9 +478,9 @@ class SentinelBackend(RedisBackend):
 
         result_backend_transport_opts = self.app.conf.get(
             "result_backend_transport_options", {})
-        master_name = result_backend_transport_opts.get("master_name", None)
+        main_name = result_backend_transport_opts.get("main_name", None)
 
-        return sentinel_instance.master_for(
-            service_name=master_name,
+        return sentinel_instance.main_for(
+            service_name=main_name,
             redis_class=self._get_client(),
         ).connection_pool
