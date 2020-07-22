@@ -52,7 +52,7 @@ def encode(data, marker, passphrase=None, randfunc=None):
         The piece of binary data to encode.
       marker (string):
         The marker for the PEM block (e.g. "PUBLIC KEY").
-        Note that there is no official master list for all allowed markers.
+        Note that there is no official main list for all allowed markers.
         Still, you can refer to the OpenSSL_ source code.
       passphrase (byte string):
         If given, the PEM block will be encrypted. The key is derived from

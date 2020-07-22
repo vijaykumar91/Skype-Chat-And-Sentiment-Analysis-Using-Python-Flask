@@ -1060,11 +1060,11 @@ class SentinelChannel(Channel):
     `Connection` object).
 
     You must provide at least one option in Transport options:
-     * `master_name` - name of the redis group to poll
+     * `main_name` - name of the redis group to poll
     """
 
     from_transport_options = Channel.from_transport_options + (
-        'master_name',
+        'main_name',
         'min_other_sentinels',
         'sentinel_kwargs')
 
@@ -1084,10 +1084,10 @@ class SentinelChannel(Channel):
             sentinel_kwargs=getattr(self, 'sentinel_kwargs', {}),
             **additional_params)
 
-        master_name = getattr(self, 'master_name', None)
+        main_name = getattr(self, 'main_name', None)
 
-        return sentinel_inst.master_for(
-            master_name,
+        return sentinel_inst.main_for(
+            main_name,
             self.Client,
         ).connection_pool
 
