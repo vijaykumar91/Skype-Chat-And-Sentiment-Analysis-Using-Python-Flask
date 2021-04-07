@@ -14,7 +14,7 @@ bleach==2.1.4
 bokeh==0.13.0
 boto3==1.9.19
 botocore==1.12.19
-bottle==0.12.13
+bottle==0.12.19
 braintree==3.48.0
 cachetools==2.1.0
 cairocffi==0.9.0
